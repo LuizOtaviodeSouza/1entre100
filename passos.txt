@@ -1,0 +1,4 @@
+git config --global user.name LuizOtaviodeSouza
+git config --global user.email lui-otavio@hotmail.com
+
+npx expo start --localhost --android
