@@ -42,8 +42,23 @@ export default function App() {
         setMensagem(`☠️ Fim de jogo! O número era ${numeroAleatorio}`);
         setJogoEncerrado(true);
       } else {
-        const dica = numeroDigitado > numeroAleatorio ? 'Muito alto!' : 'Muito baixo!';
-        setMensagem(dica);
+        let dicaBase = numeroDigitado > numeroAleatorio ? 'Muito alto!' : 'Muito baixo!';
+        let dicaExtra = '';
+
+        const diferenca = Math.abs(numeroDigitado - numeroAleatorio);
+
+        if (diferenca <= 5) {
+          dicaExtra = ' 🔥 Está muito perto!';
+        } else if (diferenca <= 10) {
+          dicaExtra = ' 👀 Está perto.';
+        } else {
+          // Dica de faixa
+          const faixaInicio = Math.floor((numeroAleatorio - 1) / 10) * 10 + 1;
+          const faixaFim = faixaInicio + 9;
+          dicaExtra = ` 💡 Dica: está entre ${faixaInicio} e ${faixaFim}.`;
+        }
+
+        setMensagem(`${dicaBase}${dicaExtra}`);
         setTentativas(novaTentativa);
       }
     }
